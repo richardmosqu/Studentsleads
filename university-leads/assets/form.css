@@ -1,0 +1,508 @@
+/* University Leads — formulario conversacional. */
+
+.ul-form-wrap {
+	--ul-accent: #2563eb;
+	max-width: 640px;
+	margin: 0 auto;
+}
+
+.ul-form-logo {
+	display: block;
+	max-height: 80px;
+	max-width: 240px;
+	margin: 0 auto 1rem !important;
+}
+
+/* El centrado del encabezado se fuerza con !important porque algunos
+   temas sobreescriben los márgenes de h3/p y corren el bloque a la izquierda. */
+
+.ul-form-wrap .ul-form-title {
+	text-align: center !important;
+	line-height: 1.3;
+	margin: 0 auto 0.75rem !important;
+}
+
+.ul-form-wrap .ul-form-subtitle {
+	text-align: center !important;
+	color: #555;
+	line-height: 1.55;
+	max-width: 480px;
+	margin: 0 auto 2rem !important;
+}
+
+/* ---- Progreso ---- */
+
+.ul-progress {
+	display: none;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 1.75rem;
+}
+
+.ul-form--wizard .ul-progress {
+	display: flex;
+}
+
+.ul-progress__track {
+	flex: 1;
+	height: 8px;
+	background: #e5e7eb;
+	border-radius: 999px;
+	overflow: hidden;
+}
+
+.ul-progress__bar {
+	height: 100%;
+	width: 4%;
+	background: var( --ul-accent );
+	border-radius: 999px;
+	transition: width 0.35s ease;
+}
+
+.ul-progress__label {
+	font-size: 0.8rem;
+	font-weight: 700;
+	color: #6b7280;
+	min-width: 44px;
+	text-align: right;
+}
+
+/* ---- Pasos ---- */
+
+.ul-step {
+	margin-bottom: 1.5rem;
+}
+
+.ul-form--wizard .ul-step {
+	display: none;
+	margin-bottom: 2rem;
+}
+
+.ul-form--wizard .ul-step--active {
+	display: block;
+	animation: ul-step-in 0.3s ease;
+}
+
+@keyframes ul-step-in {
+	from {
+		opacity: 0;
+		transform: translateY( 14px );
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
+.ul-step--shake {
+	animation: ul-shake 0.3s ease;
+}
+
+@keyframes ul-shake {
+	20% { transform: translateX( -6px ); }
+	50% { transform: translateX( 6px ); }
+	80% { transform: translateX( -3px ); }
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.ul-form--wizard .ul-step--active,
+	.ul-step--shake {
+		animation: none;
+	}
+	.ul-progress__bar {
+		transition: none;
+	}
+}
+
+.ul-step__q {
+	font-size: 1.25rem;
+	line-height: 1.45;
+	margin: 0 0 1.25rem;
+}
+
+.ul-step__hint--top {
+	margin: -0.75rem 0 1rem;
+}
+
+.ul-step__optional {
+	font-size: 0.85rem;
+	font-weight: 500;
+	color: #9ca3af;
+}
+
+.ul-step__sublabel {
+	display: block;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: #4b5563;
+	margin: 0.9rem 0 0.3rem;
+}
+
+.ul-step__hint {
+	font-size: 0.82rem;
+	color: #9ca3af;
+	margin: 0.6rem 0 0;
+}
+
+/* ---- Campos ---- */
+
+.ul-form input[type="text"],
+.ul-form input[type="tel"],
+.ul-form input[type="email"],
+.ul-form textarea {
+	width: 100%;
+	padding: 0.8rem 1rem;
+	border: 2px solid #e5e7eb;
+	border-radius: 12px;
+	font: inherit;
+	font-size: 1.05rem;
+	box-sizing: border-box;
+	background: #fff;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ul-form input:focus,
+.ul-form textarea:focus {
+	outline: none;
+	border-color: var( --ul-accent );
+	box-shadow: 0 0 0 4px color-mix( in srgb, var( --ul-accent ) 15%, transparent );
+}
+
+/* ---- Opciones tipo tarjeta ---- */
+
+.ul-options {
+	display: grid;
+	gap: 12px;
+}
+
+.ul-option {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	padding: 0.85rem 1.1rem;
+	border: 2px solid #e5e7eb;
+	border-radius: 12px;
+	background: #fff;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.ul-option:hover {
+	border-color: var( --ul-accent );
+	transform: translateY( -1px );
+}
+
+.ul-option input[type="radio"] {
+	position: absolute;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.ul-option__check {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 22px;
+	height: 22px;
+	border: 2px solid #d1d5db;
+	border-radius: 50%;
+	font-size: 12px;
+	font-weight: 800;
+	color: transparent;
+	flex: none;
+	transition: all 0.15s ease;
+}
+
+.ul-option:has( input:checked ),
+.ul-option--selected {
+	border-color: var( --ul-accent );
+	background: color-mix( in srgb, var( --ul-accent ) 8%, #fff );
+}
+
+.ul-option:has( input:checked ) .ul-option__check,
+.ul-option--selected .ul-option__check {
+	background: var( --ul-accent );
+	border-color: var( --ul-accent );
+	color: #fff;
+}
+
+.ul-option:has( input:focus-visible ) {
+	outline: 2px solid var( --ul-accent );
+	outline-offset: 2px;
+}
+
+/* ---- Navegación ---- */
+
+.ul-nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 12px;
+	margin-top: 0.5rem;
+}
+
+/* Los estilos de los botones se fuerzan con !important para que el tema
+   del sitio no los pinte con sus propios colores (normal, hover y focus). */
+
+.ul-form-wrap .ul-nav__prev,
+.ul-form-wrap .ul-nav__next {
+	display: none;
+	font: inherit;
+	cursor: pointer;
+	border-radius: 10px;
+	padding: 0.7rem 1.4rem;
+	transition: filter 0.15s ease;
+	-webkit-appearance: none;
+	appearance: none;
+	text-decoration: none !important;
+	box-shadow: none !important;
+	outline: none;
+}
+
+.ul-form--wizard .ul-nav__prev,
+.ul-form--wizard .ul-nav__next {
+	display: inline-block;
+}
+
+.ul-form--wizard .ul-nav__next[hidden],
+.ul-form--wizard .ul-submit[hidden] {
+	display: none;
+}
+
+.ul-form-wrap .ul-nav__prev {
+	background: transparent !important;
+	border: 0 !important;
+	color: #6b7280 !important;
+	font-weight: 600;
+}
+
+.ul-form-wrap .ul-nav__prev:hover,
+.ul-form-wrap .ul-nav__prev:focus,
+.ul-form-wrap .ul-nav__prev:active {
+	background: transparent !important;
+	color: #111827 !important;
+}
+
+.ul-form-wrap .ul-nav__next {
+	background: var( --ul-accent ) !important;
+	border: 0 !important;
+	color: #fff !important;
+	font-weight: 700;
+	font-size: 1rem;
+}
+
+.ul-form-wrap .ul-nav__next:hover,
+.ul-form-wrap .ul-nav__next:focus,
+.ul-form-wrap .ul-nav__next:active {
+	background: var( --ul-accent ) !important;
+	color: #fff !important;
+	filter: brightness( 0.88 );
+}
+
+.ul-form-wrap .ul-submit {
+	display: block;
+	width: 100%;
+	padding: 0.9rem 1.5rem;
+	border: 0 !important;
+	border-radius: 12px;
+	background: var( --ul-accent ) !important;
+	color: #fff !important;
+	font-weight: 700;
+	font-size: 1.05rem;
+	cursor: pointer;
+	transition: filter 0.15s ease, transform 0.1s ease;
+	-webkit-appearance: none;
+	appearance: none;
+	text-decoration: none !important;
+	box-shadow: none !important;
+}
+
+.ul-form--wizard .ul-submit {
+	width: auto;
+	margin-left: auto;
+}
+
+.ul-form-wrap .ul-submit:hover,
+.ul-form-wrap .ul-submit:focus,
+.ul-form-wrap .ul-submit:active {
+	background: var( --ul-accent ) !important;
+	color: #fff !important;
+	filter: brightness( 0.88 );
+	transform: translateY( -1px );
+}
+
+.ul-form-wrap .ul-nav__next:focus-visible,
+.ul-form-wrap .ul-submit:focus-visible {
+	outline: 3px solid color-mix( in srgb, var( --ul-accent ) 40%, transparent );
+	outline-offset: 2px;
+}
+
+/* ---- Avisos ---- */
+
+.ul-notice {
+	padding: 2.25rem 2rem;
+	border-radius: 14px;
+	margin: 0.5rem 0 1.5rem;
+	text-align: center;
+}
+
+.ul-notice--ok {
+	background: #f0fdf4;
+	border: 1px solid #bbf7d0;
+	color: #14532d;
+}
+
+.ul-notice--error {
+	background: #fef2f2;
+	border: 1px solid #fecaca;
+	color: #991b1b;
+	text-align: left;
+}
+
+.ul-notice__emoji {
+	font-size: 2.4rem;
+	display: block;
+	margin-bottom: 0.75rem;
+}
+
+.ul-notice__msg {
+	font-size: 1.05rem;
+	line-height: 1.6;
+	max-width: 440px;
+	margin: 0 auto 1.5rem;
+}
+
+.ul-notice__pkg {
+	display: block;
+	background: #fff;
+	border: 2px solid var( --ul-accent );
+	border-radius: 12px;
+	padding: 1.35rem 1.5rem;
+	margin: 0 auto 1.5rem;
+	max-width: 440px;
+}
+
+.ul-notice__pkg-kicker {
+	display: block;
+	font-size: 0.75rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: var( --ul-accent );
+	margin-bottom: 0.6rem;
+}
+
+.ul-notice__pkg-name {
+	display: block;
+	font-size: 1.15rem;
+	line-height: 1.4;
+	color: #111827;
+	margin-bottom: 0.5rem;
+}
+
+.ul-notice__pkg-desc {
+	display: block;
+	font-size: 0.92rem;
+	line-height: 1.55;
+	color: #4b5563;
+}
+
+.ul-notice__next {
+	font-size: 0.92rem;
+	line-height: 1.6;
+	max-width: 420px;
+	margin: 0 auto;
+}
+
+/* Honeypot: oculto para humanos, visible para bots. */
+.ul-hp {
+	position: absolute !important;
+	left: -9999px !important;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+/* ---- Teléfono ---- */
+
+@media ( max-width: 600px ) {
+	.ul-form-wrap {
+		padding: 0 4px;
+	}
+
+	.ul-form-title {
+		font-size: 1.35rem;
+		line-height: 1.25;
+	}
+
+	.ul-form-subtitle {
+		font-size: 0.95rem;
+		margin-bottom: 1.1rem;
+	}
+
+	.ul-form-logo {
+		max-height: 60px;
+	}
+
+	.ul-progress {
+		margin-bottom: 1.25rem;
+	}
+
+	.ul-step__q {
+		font-size: 1.08rem;
+	}
+
+	/* 16px mínimo para que iOS no haga zoom al enfocar un campo. */
+	.ul-form input[type="text"],
+	.ul-form input[type="tel"],
+	.ul-form input[type="email"],
+	.ul-form textarea {
+		font-size: 16px;
+		padding: 0.75rem 0.9rem;
+	}
+
+	.ul-option {
+		padding: 0.8rem 0.9rem;
+		font-size: 0.95rem;
+		/* Área táctil cómoda (mínimo recomendado ~44px). */
+		min-height: 48px;
+	}
+
+	.ul-option:hover {
+		transform: none;
+	}
+
+	.ul-nav {
+		gap: 8px;
+	}
+
+	/* El botón principal ocupa el ancho disponible: más fácil de tocar. */
+	.ul-form--wizard .ul-nav__next,
+	.ul-form--wizard .ul-submit {
+		flex: 1;
+		width: auto;
+		margin-left: 0;
+		padding: 0.85rem 1rem;
+		font-size: 1rem;
+	}
+
+	.ul-form-wrap .ul-nav__prev {
+		padding: 0.85rem 0.9rem;
+		flex: none;
+	}
+
+	.ul-notice {
+		padding: 1.1rem 1rem;
+	}
+
+	.ul-notice__pkg {
+		padding: 0.85rem 1rem;
+	}
+
+	.ul-notice__pkg-name {
+		font-size: 1.05rem;
+	}
+}

@@ -1,0 +1,396 @@
+/* University Leads — portal frontal de leads. */
+
+.ul-portal {
+	--ul-accent: #2563eb;
+	max-width: 860px;
+	margin: 0 auto;
+}
+
+.ul-portal a {
+	text-decoration: none;
+}
+
+/* ---- Login ---- */
+
+.ul-portal__login {
+	max-width: 400px;
+	margin: 2rem auto;
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 16px;
+	padding: 2.25rem 2rem;
+	text-align: center;
+	box-shadow: 0 12px 32px rgba( 15, 23, 42, 0.08 );
+}
+
+.ul-portal__login-emoji {
+	font-size: 2.4rem;
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+.ul-portal__login-title {
+	margin: 0 0 0.4rem !important;
+}
+
+.ul-portal__login-sub {
+	color: #6b7280;
+	font-size: 0.95rem;
+	margin: 0 0 1.5rem !important;
+}
+
+.ul-portal__pw {
+	width: 100%;
+	padding: 0.75rem 1rem;
+	border: 2px solid #e5e7eb;
+	border-radius: 10px;
+	font: inherit;
+	font-size: 16px;
+	box-sizing: border-box;
+	margin-bottom: 0.9rem;
+	text-align: center;
+}
+
+.ul-portal__pw:focus {
+	outline: none;
+	border-color: var( --ul-accent );
+}
+
+.ul-portal__error {
+	background: #fef2f2;
+	border: 1px solid #fecaca;
+	color: #991b1b;
+	border-radius: 10px;
+	padding: 0.6rem 0.9rem;
+	font-size: 0.9rem;
+	margin: 0 0 1rem !important;
+}
+
+.ul-portal__setup {
+	background: #fffbeb;
+	border: 1px solid #fde68a;
+	color: #92400e;
+	border-radius: 10px;
+	padding: 0.9rem 1.1rem;
+}
+
+/* ---- Botones ---- */
+
+.ul-portal .ul-portal__btn {
+	display: inline-block;
+	width: 100%;
+	padding: 0.8rem 1.4rem;
+	border: 0 !important;
+	border-radius: 10px;
+	background: var( --ul-accent ) !important;
+	color: #fff !important;
+	font-weight: 700;
+	font-size: 1rem;
+	cursor: pointer;
+	text-align: center;
+	transition: filter 0.15s ease;
+	-webkit-appearance: none;
+	appearance: none;
+	box-shadow: none !important;
+	text-decoration: none !important;
+}
+
+.ul-portal .ul-portal__btn:hover,
+.ul-portal .ul-portal__btn:focus {
+	background: var( --ul-accent ) !important;
+	color: #fff !important;
+	filter: brightness( 0.88 );
+}
+
+.ul-portal .ul-portal__btn--export {
+	width: auto;
+	font-size: 0.92rem;
+	padding: 0.65rem 1.1rem;
+}
+
+.ul-portal__logout {
+	color: #6b7280 !important;
+	font-size: 0.88rem;
+	margin-left: 12px;
+}
+
+.ul-portal__logout:hover {
+	color: #111827 !important;
+	text-decoration: underline !important;
+}
+
+/* ---- Barra superior ---- */
+
+.ul-portal__bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 16px;
+	flex-wrap: wrap;
+	margin-bottom: 1.25rem;
+}
+
+.ul-portal__title {
+	margin: 0 0 0.15rem !important;
+	font-size: 1.4rem;
+}
+
+.ul-portal__count {
+	margin: 0 !important;
+	color: #6b7280;
+	font-size: 0.9rem;
+}
+
+.ul-portal__actions {
+	display: flex;
+	align-items: center;
+}
+
+/* ---- Pestañas de estado ---- */
+
+.ul-portal__tabs {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-bottom: 1.5rem;
+}
+
+.ul-portal__tab {
+	padding: 0.45rem 0.9rem;
+	border: 1.5px solid #e5e7eb;
+	border-radius: 999px;
+	background: #fff;
+	color: #374151 !important;
+	font-size: 0.88rem;
+	font-weight: 600;
+	transition: all 0.15s ease;
+}
+
+.ul-portal__tab span {
+	display: inline-block;
+	background: #f3f4f6;
+	border-radius: 999px;
+	padding: 0 8px;
+	margin-left: 4px;
+	font-size: 0.78rem;
+}
+
+.ul-portal__tab:hover {
+	border-color: var( --ul-accent );
+}
+
+.ul-portal__tab.is-active {
+	background: var( --ul-accent );
+	border-color: var( --ul-accent );
+	color: #fff !important;
+}
+
+.ul-portal__tab.is-active span {
+	background: rgba( 255, 255, 255, 0.25 );
+	color: #fff;
+}
+
+/* ---- Tarjetas de lead ---- */
+
+.ul-portal__list {
+	display: grid;
+	gap: 14px;
+}
+
+.ul-plead {
+	background: #fff;
+	border: 1px solid #e5e7eb;
+	border-radius: 14px;
+	padding: 1.1rem 1.25rem;
+	box-shadow: 0 2px 6px rgba( 15, 23, 42, 0.05 );
+}
+
+.ul-plead__head {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 10px;
+	margin-bottom: 0.5rem;
+}
+
+.ul-plead__name {
+	font-size: 1.05rem;
+	display: block;
+}
+
+.ul-plead__date {
+	color: #9ca3af;
+	font-size: 0.8rem;
+}
+
+.ul-plead__estado {
+	padding: 3px 12px;
+	border-radius: 999px;
+	font-size: 0.78rem;
+	font-weight: 700;
+	white-space: nowrap;
+}
+
+.ul-plead__estado--nuevo {
+	background: #dbeafe;
+	color: #1e40af;
+}
+
+.ul-plead__estado--potencial {
+	background: #fef3c7;
+	color: #92400e;
+}
+
+.ul-plead__estado--contactado {
+	background: #d1fae5;
+	color: #065f46;
+}
+
+.ul-plead__estado--cerrado {
+	background: #f3f4f6;
+	color: #4b5563;
+}
+
+.ul-plead__pkg {
+	display: inline-block;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: #374151;
+	background: #f3f4f6;
+	border-radius: 8px;
+	padding: 3px 10px;
+	margin-bottom: 0.75rem;
+}
+
+.ul-plead__contact {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin-bottom: 0.75rem;
+}
+
+.ul-plead__cta {
+	display: inline-block;
+	padding: 0.45rem 0.9rem;
+	border-radius: 9px;
+	font-size: 0.88rem;
+	font-weight: 600;
+	border: 1.5px solid #e5e7eb;
+	color: #374151 !important;
+	transition: all 0.15s ease;
+}
+
+.ul-plead__cta:hover {
+	border-color: #9ca3af;
+}
+
+.ul-plead__cta--wa {
+	background: #dcfce7;
+	border-color: #86efac;
+	color: #166534 !important;
+}
+
+.ul-plead__cta--wa:hover {
+	background: #bbf7d0;
+}
+
+.ul-plead__cta--mail {
+	background: #eff6ff;
+	border-color: #bfdbfe;
+	color: #1e40af !important;
+}
+
+.ul-plead__cta--mail:hover {
+	background: #dbeafe;
+}
+
+.ul-plead__details {
+	font-size: 0.88rem;
+	margin-bottom: 0.75rem;
+}
+
+.ul-plead__details summary {
+	cursor: pointer;
+	color: var( --ul-accent );
+	font-weight: 600;
+}
+
+.ul-plead__details ul {
+	margin: 0.6rem 0 0;
+	padding-left: 18px;
+}
+
+.ul-plead__details li {
+	margin-bottom: 0.4rem;
+}
+
+.ul-plead__status {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	border-top: 1px solid #f3f4f6;
+	padding-top: 0.75rem;
+	font-size: 0.85rem;
+	flex-wrap: wrap;
+}
+
+.ul-plead__status label {
+	color: #6b7280;
+	font-weight: 600;
+}
+
+.ul-plead__status select {
+	padding: 0.35rem 0.6rem;
+	border: 1.5px solid #e5e7eb;
+	border-radius: 8px;
+	font: inherit;
+	font-size: 0.85rem;
+	background: #fff;
+}
+
+.ul-plead__status button {
+	padding: 0.4rem 0.9rem;
+	border: 0 !important;
+	border-radius: 8px;
+	background: #111827 !important;
+	color: #fff !important;
+	font: inherit;
+	font-size: 0.82rem;
+	font-weight: 600;
+	cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.ul-plead__status button:hover {
+	background: #374151 !important;
+	color: #fff !important;
+}
+
+.ul-portal__empty {
+	text-align: center;
+	color: #9ca3af;
+	padding: 2rem 0;
+}
+
+/* ---- Teléfono ---- */
+
+@media ( max-width: 600px ) {
+	.ul-portal__bar {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	.ul-plead__head {
+		flex-direction: column;
+	}
+
+	.ul-plead__cta {
+		flex: 1;
+		text-align: center;
+		min-height: 44px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
