@@ -22,7 +22,6 @@ function ul_field_emoji( $key ) {
 		'presupuesto' => '💰',
 		'ingles'      => '🗣️',
 		'inicio'      => '📅',
-		'beca'        => '🏅',
 	);
 	return isset( $emojis[ $key ] ) ? $emojis[ $key ] : '✨';
 }

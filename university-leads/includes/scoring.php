@@ -26,10 +26,6 @@ function ul_default_packages() {
 			'name' => __( 'Paquete Universitario Estándar', 'university-leads' ),
 			'desc' => __( 'Programas universitarios en Europa y Latinoamérica con excelente relación calidad-precio.', 'university-leads' ),
 		),
-		'beca'     => array(
-			'name' => __( 'Paquete Becas y Financiamiento', 'university-leads' ),
-			'desc' => __( 'Programas con becas parciales o totales y opciones de financiamiento estudiantil.', 'university-leads' ),
-		),
 		'idiomas'  => array(
 			'name' => __( 'Paquete Idiomas + Universidad', 'university-leads' ),
 			'desc' => __( 'Curso intensivo de idioma en el extranjero como puerta de entrada a la universidad.', 'university-leads' ),
@@ -59,7 +55,7 @@ function ul_get_packages() {
 /**
  * Matriz de puntos: pregunta => respuesta => (paquete => puntos).
  *
- * El presupuesto y la beca pesan más (hasta 3 puntos) porque definen
+ * El presupuesto pesa más (hasta 3 puntos) porque define
  * qué paquetes son viables; el resto afina la recomendación.
  */
 function ul_scoring_matrix() {
@@ -67,11 +63,7 @@ function ul_scoring_matrix() {
 		'presupuesto' => array(
 			'alto'  => array( 'premium' => 3, 'estandar' => 1 ),
 			'medio' => array( 'estandar' => 3, 'idiomas' => 1 ),
-			'bajo'  => array( 'beca' => 3, 'idiomas' => 1 ),
-		),
-		'beca'        => array(
-			'si' => array( 'beca' => 3 ),
-			'no' => array( 'premium' => 1, 'estandar' => 1 ),
+			'bajo'  => array( 'idiomas' => 3, 'estandar' => 1 ),
 		),
 		'ingles'      => array(
 			'avanzado'   => array( 'premium' => 2, 'estandar' => 1 ),
@@ -83,13 +75,13 @@ function ul_scoring_matrix() {
 			'canada'     => array( 'premium' => 2 ),
 			'espana'     => array( 'estandar' => 2 ),
 			'europa'     => array( 'estandar' => 2 ),
-			'latam'      => array( 'estandar' => 1, 'beca' => 1 ),
-			'cualquiera' => array( 'idiomas' => 1, 'beca' => 1 ),
+			'latam'      => array( 'estandar' => 2 ),
+			'cualquiera' => array( 'idiomas' => 1, 'estandar' => 1 ),
 		),
 		'inicio'      => array(
 			'0-6'  => array( 'premium' => 1, 'estandar' => 1 ),
 			'6-12' => array( 'estandar' => 1 ),
-			'12+'  => array( 'beca' => 1, 'idiomas' => 1 ),
+			'12+'  => array( 'idiomas' => 1 ),
 		),
 		'nivel'       => array(
 			'secundaria' => array( 'idiomas' => 1 ),

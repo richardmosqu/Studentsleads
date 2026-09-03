@@ -17,7 +17,7 @@ Inserta el shortcode `[university_leads_form]` en cualquier página para mostrar
 **Formulario inteligente**
 
 * Datos de contacto (nombre, correo, teléfono/WhatsApp, institución actual).
-* Cuestionario: nivel de estudios, país de destino, presupuesto, nivel de inglés, fecha de inicio y necesidad de beca.
+* Cuestionario: nivel de estudios, país de destino, presupuesto, nivel de inglés y fecha de inicio.
 * Algoritmo de puntaje: cada respuesta suma puntos a los paquetes y el de mayor puntaje se recomienda automáticamente. El estudiante ve su paquete ideal al enviar el formulario.
 * Anti-spam con honeypot y nonce; validación completa en el servidor.
 
@@ -36,7 +36,7 @@ Crea una página con el shortcode `[university_leads_dashboard]` y define una co
 
 **Ajustes**
 
-En *University Leads → Ajustes*: logo del formulario (biblioteca de medios), título, subtítulo, texto del botón, mensaje de éxito, color de acento, correo del equipo, correo del estudiante y nombres/descripciones de los 4 paquetes.
+En *University Leads → Ajustes*: logo del formulario (biblioteca de medios), título, subtítulo, texto del botón, mensaje de éxito, color de acento, correo del equipo, correo del estudiante y nombres/descripciones de los 3 paquetes.
 
 **Para desarrolladores**
 
