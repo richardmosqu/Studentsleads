@@ -60,13 +60,6 @@ function ul_get_fields() {
 				'12+'  => __( 'En más de un año', 'university-leads' ),
 			),
 		),
-		'beca'        => array(
-			'label'   => __( '¿Necesitas beca o financiamiento?', 'university-leads' ),
-			'choices' => array(
-				'si' => __( 'Sí, necesito beca o financiamiento', 'university-leads' ),
-				'no' => __( 'No, cuento con los recursos', 'university-leads' ),
-			),
-		),
 	);
 
 	return apply_filters( 'ul_fields', $fields );
