@@ -55,16 +55,11 @@ function ul_get_packages() {
 /**
  * Matriz de puntos: pregunta => respuesta => (paquete => puntos).
  *
- * El presupuesto pesa más (hasta 3 puntos) porque define
- * qué paquetes son viables; el resto afina la recomendación.
+ * El nivel de inglés y el destino son las señales principales;
+ * el resto afina la recomendación.
  */
 function ul_scoring_matrix() {
 	$matrix = array(
-		'presupuesto' => array(
-			'alto'  => array( 'premium' => 3, 'estandar' => 1 ),
-			'medio' => array( 'estandar' => 3, 'idiomas' => 1 ),
-			'bajo'  => array( 'idiomas' => 3, 'estandar' => 1 ),
-		),
 		'ingles'      => array(
 			'avanzado'   => array( 'premium' => 2, 'estandar' => 1 ),
 			'intermedio' => array( 'estandar' => 2 ),

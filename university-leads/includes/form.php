@@ -19,7 +19,6 @@ function ul_field_emoji( $key ) {
 	$emojis = array(
 		'nivel'       => '🎓',
 		'destino'     => '🌍',
-		'presupuesto' => '💰',
 		'ingles'      => '🗣️',
 		'inicio'      => '📅',
 	);

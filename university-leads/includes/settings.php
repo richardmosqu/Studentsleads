@@ -216,7 +216,7 @@ function ul_render_settings_page() {
 			</table>
 
 			<h2><?php esc_html_e( 'Paquetes', 'university-leads' ); ?></h2>
-			<p class="description"><?php esc_html_e( 'Edita el nombre y la descripción de cada paquete. El algoritmo asigna el paquete según presupuesto, destino, nivel de inglés y fechas.', 'university-leads' ); ?></p>
+			<p class="description"><?php esc_html_e( 'Edita el nombre y la descripción de cada paquete. El algoritmo asigna el paquete según destino, nivel de inglés y fechas.', 'university-leads' ); ?></p>
 			<table class="form-table" role="presentation">
 				<?php foreach ( $packages as $slug => $pkg ) : ?>
 					<tr>
