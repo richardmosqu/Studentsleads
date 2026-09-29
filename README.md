@@ -13,7 +13,7 @@ Plugin de WordPress para captar estudiantes interesados en **paquetes de estudio
 - Anti-spam (honeypot + nonce), validación en servidor y degradación sin JavaScript.
 
 ### 🎯 Algoritmo de recomendación
-Cada respuesta (presupuesto, destinos, inglés, fechas, nivel) suma puntos a 3 paquetes; el de mayor puntaje se recomienda al instante en pantalla y por correo. Matriz ajustable con el filtro `ul_scoring_matrix`.
+Cada respuesta (destinos, inglés, fechas, nivel) suma puntos a 3 paquetes; el de mayor puntaje se recomienda al instante en pantalla y por correo. Matriz ajustable con el filtro `ul_scoring_matrix`.
 
 ### 📋 Dashboard kanban (wp-admin)
 Menú **University Leads**: tablero *Nuevos → Potenciales → Contactados → Cerrados* con drag & drop, detalle completo de respuestas y eliminación.

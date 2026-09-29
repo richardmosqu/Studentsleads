@@ -36,14 +36,6 @@ function ul_get_fields() {
 				'cualquiera' => __( 'Aún no lo decido', 'university-leads' ),
 			),
 		),
-		'presupuesto' => array(
-			'label'   => __( '¿Con qué presupuesto anual cuentas (USD)?', 'university-leads' ),
-			'choices' => array(
-				'alto'  => __( 'Más de $20,000 al año', 'university-leads' ),
-				'medio' => __( 'Entre $8,000 y $20,000 al año', 'university-leads' ),
-				'bajo'  => __( 'Menos de $8,000 al año', 'university-leads' ),
-			),
-		),
 		'ingles'      => array(
 			'label'   => __( '¿Cuál es tu nivel de inglés?', 'university-leads' ),
 			'choices' => array(

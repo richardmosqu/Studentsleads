@@ -17,7 +17,7 @@ Inserta el shortcode `[university_leads_form]` en cualquier página para mostrar
 **Formulario inteligente**
 
 * Datos de contacto (nombre, correo, teléfono/WhatsApp, institución actual).
-* Cuestionario: nivel de estudios, país de destino, presupuesto, nivel de inglés y fecha de inicio.
+* Cuestionario: nivel de estudios, país de destino, nivel de inglés y fecha de inicio.
 * Algoritmo de puntaje: cada respuesta suma puntos a los paquetes y el de mayor puntaje se recomienda automáticamente. El estudiante ve su paquete ideal al enviar el formulario.
 * Anti-spam con honeypot y nonce; validación completa en el servidor.
 
