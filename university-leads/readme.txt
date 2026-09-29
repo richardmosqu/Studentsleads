@@ -4,7 +4,7 @@ Tags: leads, students, study abroad, form, crm
 Requires at least: 6.0
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -53,6 +53,9 @@ En *University Leads → Ajustes*: logo del formulario (biblioteca de medios), t
 4. Inserta `[university_leads_form]` en la página deseada.
 
 == Changelog ==
+
+= 1.4.0 =
+* Se eliminan del cuestionario la pregunta de beca/financiamiento y la de presupuesto anual; el paquete "Becas y Financiamiento" desaparece de la recomendación. El nivel de inglés y el destino pasan a ser las señales principales del algoritmo.
 
 = 1.3.0 =
 * Nuevo portal de leads para el equipo: shortcode `[university_leads_dashboard]` protegido por contraseña (definida en Ajustes). Lista de leads con pestañas por estado, botones de contacto (WhatsApp/correo/llamada), cambio de estado y exportación a CSV/Excel. Sesión de 12 horas con cookie firmada y límite de 5 intentos de contraseña por IP.
