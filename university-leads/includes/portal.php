@@ -112,12 +112,19 @@ function ul_portal_update_status() {
 	$estado   = isset( $_POST['ul_estado'] ) ? sanitize_key( wp_unslash( $_POST['ul_estado'] ) ) : '';
 	$statuses = ul_get_statuses();
 
-	if ( $lead_id && UL_CPT === get_post_type( $lead_id ) && isset( $statuses[ $estado ] ) ) {
-		update_post_meta( $lead_id, '_ul_estado', $estado );
+	$redirect = isset( $_POST['ul_redirect'] ) ? esc_url_raw( wp_unslash( $_POST['ul_redirect'] ) ) : home_url( '/' );
+	$redirect = wp_validate_redirect( $redirect, home_url( '/' ) );
+	$redirect = remove_query_arg( array( 'ul_saved', 'ul_save_error' ), $redirect );
+
+	if ( ! $lead_id || UL_CPT !== get_post_type( $lead_id ) || ! isset( $statuses[ $estado ] ) ) {
+		wp_safe_redirect( add_query_arg( 'ul_save_error', '1', $redirect ) );
+		exit;
 	}
 
-	$redirect = isset( $_POST['ul_redirect'] ) ? esc_url_raw( wp_unslash( $_POST['ul_redirect'] ) ) : home_url( '/' );
-	wp_safe_redirect( wp_validate_redirect( $redirect, home_url( '/' ) ) );
+	update_post_meta( $lead_id, '_ul_estado', $estado );
+
+	// Se vuelve a la tarjeta guardada para que el equipo vea el cambio confirmado.
+	wp_safe_redirect( add_query_arg( 'ul_saved', $lead_id, $redirect ) . '#ul-lead-' . $lead_id );
 	exit;
 }
 add_action( 'admin_post_nopriv_ul_portal_status', 'ul_portal_update_status' );
@@ -270,6 +277,15 @@ function ul_portal_render_board() {
 		$filter = '';
 	}
 
+	// Al guardar un estado se vuelve a la misma pestaña.
+	$return = '' !== $filter ? add_query_arg( 'ul_estado', $filter, $current ) : $current;
+
+	$saved_id   = isset( $_GET['ul_saved'] ) ? absint( $_GET['ul_saved'] ) : 0;
+	$saved_lead = $saved_id && UL_CPT === get_post_type( $saved_id ) ? get_post( $saved_id ) : null;
+	$save_error = isset( $_GET['ul_save_error'] );
+
+	wp_enqueue_script( 'ul-portal', UL_URL . 'assets/portal.js', array(), UL_VERSION, true );
+
 	$leads = get_posts(
 		array(
 			'post_type'      => UL_CPT,
@@ -321,6 +337,21 @@ function ul_portal_render_board() {
 			<?php endforeach; ?>
 		</div>
 
+		<?php if ( $save_error ) : ?>
+			<p class="ul-portal__error" role="alert"><?php esc_html_e( 'No se pudo guardar el estado. Recarga la página e inténtalo de nuevo.', 'university-leads' ); ?></p>
+		<?php elseif ( $saved_lead ) : ?>
+			<?php
+			$saved_estado = get_post_meta( $saved_lead->ID, '_ul_estado', true );
+			$saved_estado = isset( $statuses[ $saved_estado ] ) ? $saved_estado : 'nuevo';
+			?>
+			<p class="ul-portal__notice" role="status">
+				<?php
+				/* translators: 1: nombre del lead, 2: estado nuevo. */
+				echo esc_html( sprintf( __( 'Estado actualizado: %1$s → %2$s.', 'university-leads' ), $saved_lead->post_title, $statuses[ $saved_estado ] ) );
+				?>
+			</p>
+		<?php endif; ?>
+
 		<div class="ul-portal__list">
 			<?php $shown = 0; ?>
 			<?php foreach ( $leads as $lead ) : ?>
@@ -331,7 +362,7 @@ function ul_portal_render_board() {
 					continue;
 				}
 				$shown++;
-				ul_portal_render_lead( $lead, $estado, $statuses, $packages, $fields, $current );
+				ul_portal_render_lead( $lead, $estado, $statuses, $packages, $fields, $return, $saved_id === $lead->ID );
 				?>
 			<?php endforeach; ?>
 
@@ -347,7 +378,7 @@ function ul_portal_render_board() {
 /**
  * Tarjeta de un lead en el portal.
  */
-function ul_portal_render_lead( $lead, $estado, $statuses, $packages, $fields, $current ) {
+function ul_portal_render_lead( $lead, $estado, $statuses, $packages, $fields, $redirect, $is_saved ) {
 	$email    = get_post_meta( $lead->ID, '_ul_email', true );
 	$telefono = get_post_meta( $lead->ID, '_ul_telefono', true );
 	$inst     = get_post_meta( $lead->ID, '_ul_institucion', true );
@@ -357,7 +388,7 @@ function ul_portal_render_lead( $lead, $estado, $statuses, $packages, $fields, $
 	$pkg_name = isset( $packages[ $paquete ] ) ? $packages[ $paquete ]['name'] : $paquete;
 	$wa_url   = $telefono ? 'https://wa.me/' . rawurlencode( preg_replace( '/[^0-9]/', '', $telefono ) ) : '';
 	?>
-	<div class="ul-plead">
+	<div class="ul-plead<?php echo $is_saved ? ' ul-plead--saved' : ''; ?>" id="ul-lead-<?php echo esc_attr( $lead->ID ); ?>">
 		<div class="ul-plead__head">
 			<div>
 				<strong class="ul-plead__name"><?php echo esc_html( $lead->post_title ); ?></strong>
@@ -408,15 +439,20 @@ function ul_portal_render_lead( $lead, $estado, $statuses, $packages, $fields, $
 		<form class="ul-plead__status" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
 			<input type="hidden" name="action" value="ul_portal_status" />
 			<input type="hidden" name="ul_lead" value="<?php echo esc_attr( $lead->ID ); ?>" />
-			<input type="hidden" name="ul_redirect" value="<?php echo esc_url( $current ); ?>" />
+			<input type="hidden" name="ul_redirect" value="<?php echo esc_url( $redirect ); ?>" />
 			<?php wp_nonce_field( 'ul_portal_status', 'ul_portal_nonce' ); ?>
 			<label for="ul-pestado-<?php echo esc_attr( $lead->ID ); ?>"><?php esc_html_e( 'Estado:', 'university-leads' ); ?></label>
-			<select id="ul-pestado-<?php echo esc_attr( $lead->ID ); ?>" name="ul_estado">
+			<?php /* autocomplete=off: Firefox restaura al recargar valores que nunca se guardaron. */ ?>
+			<select id="ul-pestado-<?php echo esc_attr( $lead->ID ); ?>" name="ul_estado" autocomplete="off">
 				<?php foreach ( $statuses as $sk => $sl ) : ?>
 					<option value="<?php echo esc_attr( $sk ); ?>" <?php selected( $estado, $sk ); ?>><?php echo esc_html( $sl ); ?></option>
 				<?php endforeach; ?>
 			</select>
 			<button type="submit"><?php esc_html_e( 'Guardar', 'university-leads' ); ?></button>
+			<span class="ul-plead__saving" hidden><?php esc_html_e( 'Guardando…', 'university-leads' ); ?></span>
+			<?php if ( $is_saved ) : ?>
+				<span class="ul-plead__saved">✓ <?php esc_html_e( 'Guardado', 'university-leads' ); ?></span>
+			<?php endif; ?>
 		</form>
 	</div>
 	<?php
