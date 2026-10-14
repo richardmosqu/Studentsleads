@@ -3,7 +3,7 @@
  * Plugin Name:       University Leads
  * Plugin URI:        https://campuslifepa.com
  * Description:       Captación de estudiantes interesados en paquetes para estudiar en el extranjero: formulario con recomendación automática de paquete, dashboard kanban de seguimiento y notificaciones por correo. Para Campus Life / TheUForYou.
- * Version:           1.3.0
+ * Version:           1.4.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            TheUForYou
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'UL_VERSION', '1.3.0' );
+define( 'UL_VERSION', '1.4.0' );
 define( 'UL_CPT', 'ul_lead' );
 define( 'UL_DIR', plugin_dir_path( __FILE__ ) );
 define( 'UL_URL', plugin_dir_url( __FILE__ ) );
